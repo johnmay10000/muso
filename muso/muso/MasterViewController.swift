@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
@@ -116,6 +117,14 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         NSLog(searchController.searchBar.text)
+        
+        Alamofire.request(.GET, "http://httpbin.org/get", parameters: ["foo": "bar"])
+            .response { (request, response, data, error) in
+                println(request)
+                println(response)
+                println(error)
+        }
+        
     }
 
 }
