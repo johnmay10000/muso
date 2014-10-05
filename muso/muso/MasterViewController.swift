@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     var detailViewController: DetailViewController? = nil
     var objects = NSMutableArray()
-
+    var searchController = UISearchController()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +33,15 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
         }
+        
+        self.searchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self;
+            controller.searchBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), 44.0)
+            self.tableView.tableHeaderView = controller.searchBar
+            self.definesPresentationContext = true
+            return controller
+        })()
     }
 
     override func didReceiveMemoryWarning() {
@@ -103,6 +112,10 @@ class MasterViewController: UITableViewController {
 //                self.searchDisplayController.searchResultsTableView.reloadData()
 //            })
         }
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        NSLog(searchController.searchBar.text)
     }
 
 }
