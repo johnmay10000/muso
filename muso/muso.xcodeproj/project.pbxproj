@@ -16,10 +16,10 @@
 		9434E50B19DE81DA004D4EAA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9434E50A19DE81DA004D4EAA /* Images.xcassets */; };
 		9434E50E19DE81DA004D4EAA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9434E50C19DE81DA004D4EAA /* LaunchScreen.xib */; };
 		9434E51A19DE81DA004D4EAA /* musoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434E51919DE81DA004D4EAA /* musoTests.swift */; };
-		94EC9EB719E12E1F00EB63E9 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EB619E12E1F00EB63E9 /* swiftz.framework */; };
-		94EC9EB819E12E2A00EB63E9 /* swiftz.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EB619E12E1F00EB63E9 /* swiftz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94EC9EBD19E132B900EB63E9 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EBC19E132B900EB63E9 /* Realm.framework */; };
 		94EC9EBE19E132BE00EB63E9 /* Realm.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EBC19E132B900EB63E9 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		94EC9EC919E138E200EB63E9 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EC819E138E200EB63E9 /* swiftz.framework */; };
+		94EC9ECA19E138EA00EB63E9 /* swiftz.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EC819E138E200EB63E9 /* swiftz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +53,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				94EC9ECA19E138EA00EB63E9 /* swiftz.framework in Copy Frameworks */,
 				94EC9EBE19E132BE00EB63E9 /* Realm.framework in Copy Frameworks */,
-				94EC9EB819E12E2A00EB63E9 /* swiftz.framework in Copy Frameworks */,
 				9413F3D019E1112400D5B23F /* Alamofire.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -75,8 +75,8 @@
 		9434E51319DE81DA004D4EAA /* musoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = musoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9434E51819DE81DA004D4EAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9434E51919DE81DA004D4EAA /* musoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musoTests.swift; sourceTree = "<group>"; };
-		94EC9EB619E12E1F00EB63E9 /* swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = swiftz.framework; sourceTree = "<group>"; };
 		94EC9EBC19E132B900EB63E9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		94EC9EC819E138E200EB63E9 /* swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = swiftz.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,9 +84,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EC9EC919E138E200EB63E9 /* swiftz.framework in Frameworks */,
 				94EC9EBD19E132B900EB63E9 /* Realm.framework in Frameworks */,
 				9413F3A319E1051800D5B23F /* Alamofire.framework in Frameworks */,
-				94EC9EB719E12E1F00EB63E9 /* swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,8 +112,8 @@
 		9434E4F319DE81DA004D4EAA = {
 			isa = PBXGroup;
 			children = (
+				94EC9EC819E138E200EB63E9 /* swiftz.framework */,
 				94EC9EBC19E132B900EB63E9 /* Realm.framework */,
-				94EC9EB619E12E1F00EB63E9 /* swiftz.framework */,
 				9413F39A19E1048200D5B23F /* Alamofire.xcodeproj */,
 				9434E4FE19DE81DA004D4EAA /* muso */,
 				9434E51619DE81DA004D4EAA /* musoTests */,
