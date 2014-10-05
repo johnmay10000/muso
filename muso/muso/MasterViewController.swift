@@ -92,6 +92,18 @@ class MasterViewController: UITableViewController {
         }
     }
 
+    // called when text changes (including clear)
+    func searchBar(searchBar: UISearchBar!, textDidChange searchText: String!) {
+        if (searchText.utf16Count > 3) {
+            NSLog(searchText.lowercaseString)
+//            Api().get(searchText,{
+//                (results:Array<Dictionary<String,AnyObject>>) in
+//                self.objects.setArray(results)
+//                self.tableView.reloadData()
+//                self.searchDisplayController.searchResultsTableView.reloadData()
+//            })
+        }
+    }
 
 }
 
