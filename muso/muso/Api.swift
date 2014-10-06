@@ -28,7 +28,7 @@ import Alamofire
 
 class Api {
     func search(searchQuery:String, completion:(Array<AnyObject>) -> Void) {
-        Alamofire.request(.GET, "http://api.discogs.com/database/search?", parameters: ["q":searchQuery, "type":"artist"])
+        Alamofire.request(.GET, "http://api.discogs.com/database/search", parameters: ["q":searchQuery])
             .responseJSON { (request, response, json, error) in
 //                println(request)
 //                println(response)
