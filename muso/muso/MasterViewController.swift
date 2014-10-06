@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Realm
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
@@ -103,7 +104,10 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if (searchController.searchBar.text.utf16Count > 3) {
-            Api().search(searchController.searchBar.text, {
+//            RLMRealm.useInMemoryDefaultRealm()
+            let resources = Resources().all
+//            println(resources)
+            Api().search(resources, searchQuery:searchController.searchBar.text, {
                 (results:Array<AnyObject>) in
                 let count: Int? = results.count
                 if let ct = count {

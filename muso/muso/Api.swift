@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import Realm
 // Required
 
 // Bandcamp
@@ -24,11 +25,52 @@ import Alamofire
 // search
 
 // api keys
+// Echo nest BD2FKJK9U8FCMFFT3
 
+
+class Resource : RLMObject  {
+    dynamic var name = ""
+    dynamic var key = ""
+    dynamic var  queryTerm = ""
+    dynamic var url = ""
+    dynamic var use = true
+}
+
+
+class Resources {
+    var all: RLMArray {
+        get {
+            return Resource.allObjects()
+        }
+    }
+    
+    func addResource(name:String,
+                     key:String,
+                     queryTerm:String,
+                     url:String)
+    {
+//        RLMRealm.useInMemoryDefaultRealm()
+        let realm = RLMRealm.defaultRealm()
+        let r = Resource()
+        r.name = name
+        r.key = key
+        r.queryTerm = queryTerm
+        r.url = url
+        
+        realm.transactionWithBlock(){
+            realm.addObject(r)
+        }
+    }
+}
 
 class Api {
-    func search(searchQuery:String, completion:(Array<AnyObject>) -> Void) {
-        Alamofire.request(.GET, "http://api.discogs.com/database/search", parameters: ["q":searchQuery])
+    func search(resources:RLMArray, searchQuery:String, completion:(Array<AnyObject>) -> Void) {
+        var params = Dictionary<String, String>()
+        if let searchTerm = resources[0].queryTerm {
+            params[searchTerm] = searchQuery
+        }
+        
+        Alamofire.request(.GET, resources[0].url, parameters: params)
             .responseJSON { (request, response, json, error) in
 //                println(request)
 //                println(response)
