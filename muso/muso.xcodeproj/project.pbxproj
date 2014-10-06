@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940D061919E21C6F00F8CD0F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D061819E21C6F00F8CD0F /* SwiftyJSON.swift */; };
 		9413F3A319E1051800D5B23F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9413F3A019E1048200D5B23F /* Alamofire.framework */; };
 		9413F3D019E1112400D5B23F /* Alamofire.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9413F3A019E1048200D5B23F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9434E50219DE81DA004D4EAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434E50119DE81DA004D4EAA /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 		94EC9EBE19E132BE00EB63E9 /* Realm.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EBC19E132B900EB63E9 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94EC9EC919E138E200EB63E9 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EC819E138E200EB63E9 /* swiftz.framework */; };
 		94EC9ECA19E138EA00EB63E9 /* swiftz.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 94EC9EC819E138E200EB63E9 /* swiftz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		94EC9ECC19E13CDD00EB63E9 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EC9ECB19E13CDD00EB63E9 /* Api.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		940D061819E21C6F00F8CD0F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		9413F39A19E1048200D5B23F /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		9434E4FC19DE81DA004D4EAA /* muso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = muso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9434E50019DE81DA004D4EAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		9434E51919DE81DA004D4EAA /* musoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musoTests.swift; sourceTree = "<group>"; };
 		94EC9EBC19E132B900EB63E9 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		94EC9EC819E138E200EB63E9 /* swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = swiftz.framework; sourceTree = "<group>"; };
+		94EC9ECB19E13CDD00EB63E9 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		940D061519E21BC900F8CD0F /* swiftJSON */ = {
+			isa = PBXGroup;
+			children = (
+				940D061819E21C6F00F8CD0F /* SwiftyJSON.swift */,
+			);
+			name = swiftJSON;
+			sourceTree = "<group>";
+		};
 		9413F39B19E1048200D5B23F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +124,7 @@
 		9434E4F319DE81DA004D4EAA = {
 			isa = PBXGroup;
 			children = (
+				940D061519E21BC900F8CD0F /* swiftJSON */,
 				94EC9EC819E138E200EB63E9 /* swiftz.framework */,
 				94EC9EBC19E132B900EB63E9 /* Realm.framework */,
 				9413F39A19E1048200D5B23F /* Alamofire.xcodeproj */,
@@ -133,6 +146,7 @@
 		9434E4FE19DE81DA004D4EAA /* muso */ = {
 			isa = PBXGroup;
 			children = (
+				94EC9ECB19E13CDD00EB63E9 /* Api.swift */,
 				9434E50119DE81DA004D4EAA /* AppDelegate.swift */,
 				9434E50319DE81DA004D4EAA /* MasterViewController.swift */,
 				9434E50519DE81DA004D4EAA /* DetailViewController.swift */,
@@ -295,6 +309,8 @@
 			files = (
 				9434E50619DE81DA004D4EAA /* DetailViewController.swift in Sources */,
 				9434E50419DE81DA004D4EAA /* MasterViewController.swift in Sources */,
+				94EC9ECC19E13CDD00EB63E9 /* Api.swift in Sources */,
+				940D061919E21C6F00F8CD0F /* SwiftyJSON.swift in Sources */,
 				9434E50219DE81DA004D4EAA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

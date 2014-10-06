@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
@@ -82,9 +81,9 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-
-        let object = objects[indexPath.row] as NSDate
-        cell.textLabel?.text = object.description
+//        println(objects[indexPath.row])
+        let object = objects[indexPath.row]["title"] as String
+        cell.textLabel?.text = object
         return cell
     }
 
@@ -101,30 +100,19 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
-
-    // called when text changes (including clear)
-    func searchBar(searchBar: UISearchBar!, textDidChange searchText: String!) {
-        if (searchText.utf16Count > 3) {
-            NSLog(searchText.lowercaseString)
-//            Api().get(searchText,{
-//                (results:Array<Dictionary<String,AnyObject>>) in
-//                self.objects.setArray(results)
-//                self.tableView.reloadData()
-//                self.searchDisplayController.searchResultsTableView.reloadData()
-//            })
-        }
-    }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        NSLog(searchController.searchBar.text)
-        
-        Alamofire.request(.GET, "http://httpbin.org/get", parameters: ["foo": "bar"])
-            .response { (request, response, data, error) in
-                println(request)
-                println(response)
-                println(error)
+        if (searchController.searchBar.text.utf16Count > 3) {
+            Api().search(searchController.searchBar.text, {
+                (results:Array<AnyObject>) in
+                let count: Int? = results.count
+                if let ct = count {
+//                    println(results)
+                    self.objects.setArray(results)
+                    self.tableView.reloadData()
+                }
+            })
         }
-        
     }
 
 }
