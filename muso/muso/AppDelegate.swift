@@ -20,7 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
         navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
-        Resources().addResource("Discogs", key: "", queryTerm: "q", url: "http://api.discogs.com/database/search")
+        let d = ["api_key_def":"BD2FKJK9U8FCMFFT3","api_key_name":"api_key"]
+        
+        Resources().addResource("EchoNest", api_key_def: "BD2FKJK9U8FCMFFT3", api_key_name:"api_key", queryTerm: "name", resultTerm:"artists", url: "http://developer.echonest.com/api/v4/artist/search")
+        
+        Resources().addResource("Discogs", queryTerm: "q", resultTerm:"results", url: "http://api.discogs.com/database/search")
+        
         return true
     }
 

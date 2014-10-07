@@ -30,8 +30,10 @@ import Realm
 
 class Resource : RLMObject  {
     dynamic var name = ""
-    dynamic var key = ""
-    dynamic var  queryTerm = ""
+    dynamic var api_key_def = ""
+    dynamic var api_key_name = ""
+    dynamic var queryTerm = ""
+    dynamic var resultTerm = ""
     dynamic var url = ""
     dynamic var use = true
 }
@@ -44,18 +46,22 @@ class Resources {
         }
     }
     
-    func addResource(name:String,
-                     key:String,
-                     queryTerm:String,
-                     url:String)
+    func addResource(name: String,
+                     api_key_def: String = "",
+                     api_key_name: String = "",
+                     queryTerm: String,
+                     resultTerm: String,
+                     url: String)
     {
 //        RLMRealm.useInMemoryDefaultRealm()
         let realm = RLMRealm.defaultRealm()
         let r = Resource()
         r.name = name
-        r.key = key
+        r.api_key_name = api_key_name
+        r.api_key_def = api_key_def
         r.queryTerm = queryTerm
         r.url = url
+        r.resultTerm = resultTerm
         
         realm.transactionWithBlock(){
             realm.addObject(r)
@@ -63,27 +69,36 @@ class Resources {
     }
 }
 
+// ["api_key_name":"key", "api_key":""]
+
 class Api {
     func search(resources:RLMArray, searchQuery:String, completion:(Array<AnyObject>) -> Void) {
         var params = Dictionary<String, String>()
-        if let searchTerm = resources[0].queryTerm {
-            params[searchTerm] = searchQuery
-        }
         
-        Alamofire.request(.GET, resources[0].url, parameters: params)
+        let aResource:Resource = resources[0] as Resource
+        
+//        if let searchTerm = aResource.queryTerm {
+            params[aResource.queryTerm] = searchQuery
+//        }
+        
+//        if let key_name = aResource.api_key_name {
+//            if let key_def = aResource.api_key_def {
+                    params[aResource.api_key_name] = aResource.api_key_def
+//                }
+//        }
+        
+        Alamofire.request(.GET, aResource.url, parameters: params)
             .responseJSON { (request, response, json, error) in
-//                println(request)
 //                println(response)
-//                println(error)
                 if let jsonToParse:AnyObject = json
                 {
-                    let jsonParsed = JSON(object:jsonToParse)                    
-                    if let array = jsonParsed["results"].arrayObjects {
+                    let jsonParsed = JSON(object:jsonToParse)
+                    println(jsonParsed)
+//                    jsonParsed[aResource.resultTerm].arrayObjects
+                    if let array = jsonParsed["response"][aResource.resultTerm].arrayObjects {
                       completion(array)
                     }
-//                    println(jsonParsed["results"][0]["title"])
                 }
-//                println(json)
         }
     }
 }

@@ -83,7 +83,8 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 //        println(objects[indexPath.row])
-        let object = objects[indexPath.row]["title"] as String
+//        let object = objects[indexPath.row]["title"] as String
+        let object = objects[indexPath.row]["name"] as String
         cell.textLabel?.text = object
         return cell
     }
@@ -106,12 +107,12 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         if (searchController.searchBar.text.utf16Count > 3) {
 //            RLMRealm.useInMemoryDefaultRealm()
             let resources = Resources().all
-//            println(resources)
+            println(resources)
             Api().search(resources, searchQuery:searchController.searchBar.text, {
                 (results:Array<AnyObject>) in
                 let count: Int? = results.count
                 if let ct = count {
-//                    println(results)
+                    println(results)
                     self.objects.setArray(results)
                     self.tableView.reloadData()
                 }
