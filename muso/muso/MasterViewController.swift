@@ -12,7 +12,7 @@ import Realm
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     var detailViewController: DetailViewController? = nil
-    var objects = NSMutableArray()
+    var objects = [ArtistResult]()
     var searchController = UISearchController()
 
     override func awakeFromNib() {
@@ -51,7 +51,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     }
 
     func insertNewObject(sender: AnyObject) {
-        objects.insertObject(NSDate.date(), atIndex: 0)
+        objects.insert(ArtistResult(id: 0,title: "",thumb: "",resource_url: "",type: "",uri: ""), atIndex: 0)
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
@@ -61,11 +61,13 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                let object = objects[indexPath.row] as NSDate
-                let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                let object = objects[indexPath.row] as ArtistResult
+                
+//                 TODO Get details
+//                let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
+//                controller.detailItem =
+//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//                controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
@@ -84,8 +86,8 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 //        println(objects[indexPath.row])
 //        let object = objects[indexPath.row]["title"] as String
-        let object = objects[indexPath.row]["name"] as String
-        cell.textLabel?.text = object
+        let object = objects[indexPath.row].title as String
+        cell.textLabel.text = object
         return cell
     }
 
@@ -96,7 +98,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            objects.removeObjectAtIndex(indexPath.row)
+            objects.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
@@ -105,15 +107,12 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if (searchController.searchBar.text.utf16Count > 3) {
-//            RLMRealm.useInMemoryDefaultRealm()
-            let resources = Resources().all
-            println(resources)
-            Api().search(resources, searchQuery:searchController.searchBar.text, {
-                (results:Array<AnyObject>) in
+            Api().search(Resource.allObjects(), searchQuery:searchController.searchBar.text, {
+                (results:[ArtistResult]) in
                 let count: Int? = results.count
                 if let ct = count {
-                    println(results)
-                    self.objects.setArray(results)
+                    self.objects.removeAll(keepCapacity: false)
+                    self.objects += results
                     self.tableView.reloadData()
                 }
             })

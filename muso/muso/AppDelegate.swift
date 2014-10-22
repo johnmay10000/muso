@@ -16,15 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
-        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        splitViewController.delegate = self
-        let d = ["api_key_def":"BD2FKJK9U8FCMFFT3","api_key_name":"api_key"]
+//        let splitViewController = self.window!.rootViewController as UISplitViewController
+//        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
+//        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+//        splitViewController.delegate = self
+        StartUp().checkOAuth(window, splitViewControllerDelegate: self)
+//        StartUp().showDetailsViews(window, splitViewControllerDelegate: self)
+//        let d = ["api_key_def":"BD2FKJK9U8FCMFFT3","api_key_name":"api_key"]
+//        Resources().addResource("EchoNest", name:"EchoNest", api_key_def: "BD2FKJK9U8FCMFFT3", api_key_name:"api_key", queryTerm: "name", parserResultTerms:["response","artists"], url: "http://developer.echonest.com/api/v4/artist/search")
+//        
+//        Resources().addResource("Discogs Search", name:"Discogs Search", queryTerm: "q", resultTerm:"results", url: "http://api.discogs.com/database/search")
         
-        Resources().addResource("EchoNest", api_key_def: "BD2FKJK9U8FCMFFT3", api_key_name:"api_key", queryTerm: "name", resultTerm:"artists", url: "http://developer.echonest.com/api/v4/artist/search")
-        
-        Resources().addResource("Discogs", queryTerm: "q", resultTerm:"results", url: "http://api.discogs.com/database/search")
+//        println(Resources().all)
         
         return true
     }
@@ -64,6 +67,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         }
         return false
     }
+    
+    
+    func application(application: UIApplication!, openURL url: NSURL!, sourceApplication: String!, annotation: AnyObject!) -> Bool {
+        println(url)
+        if (url.host == "oauth-callback") {
+            if (url.path!.hasPrefix("/discogs")) {
+                OAuth1Swift.handleOpenURL(url)
+            }
+//            if ( url.path!.hasPrefix("/github" ) || url.path!.hasPrefix("/instagram" ) || url.path!.hasPrefix("/foursquare")) {
+//                OAuth2Swift.handleOpenURL(url)
+//            }
+        }
+        return true
+    }
+    
 
 }
 

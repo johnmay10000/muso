@@ -7,8 +7,11 @@
 //
 
 import Foundation
-import Alamofire
+//import Alamofire
 import Realm
+//import swiftz
+//import swiftz_core
+
 // Required
 
 // Bandcamp
@@ -26,79 +29,58 @@ import Realm
 
 // api keys
 // Echo nest BD2FKJK9U8FCMFFT3
-
-
-class Resource : RLMObject  {
-    dynamic var name = ""
-    dynamic var api_key_def = ""
-    dynamic var api_key_name = ""
-    dynamic var queryTerm = ""
-    dynamic var resultTerm = ""
-    dynamic var url = ""
-    dynamic var use = true
-}
-
-
-class Resources {
-    var all: RLMArray {
-        get {
-            return Resource.allObjects()
-        }
-    }
-    
-    func addResource(name: String,
-                     api_key_def: String = "",
-                     api_key_name: String = "",
-                     queryTerm: String,
-                     resultTerm: String,
-                     url: String)
-    {
-//        RLMRealm.useInMemoryDefaultRealm()
-        let realm = RLMRealm.defaultRealm()
-        let r = Resource()
-        r.name = name
-        r.api_key_name = api_key_name
-        r.api_key_def = api_key_def
-        r.queryTerm = queryTerm
-        r.url = url
-        r.resultTerm = resultTerm
-        
-        realm.transactionWithBlock(){
-            realm.addObject(r)
-        }
-    }
-}
-
 // ["api_key_name":"key", "api_key":""]
 
 class Api {
-    func search(resources:RLMArray, searchQuery:String, completion:(Array<AnyObject>) -> Void) {
+    func search(resources:RLMResults, searchQuery:String, completion:([ArtistResult]) -> Void) {
         var params = Dictionary<String, String>()
+        let resource:Resource = resources[0] as Resource
+        let searchTerm = resource.queryTerm
+        params[searchTerm] = searchQuery
+        params["type"] = "artist"
+        let creds:RLMResults = OAuthCredentials().all
+        let cred:OAuthCredential = creds[0] as OAuthCredential
         
-        let aResource:Resource = resources[0] as Resource
+        let client:OAuthSwiftClient = OAuthSwiftClient(consumerKey:"oTwRJVjNCsbRoQyFGsDS",
+            consumerSecret: "hPJQPoeoQqmyVYMRwGAYvsnyHMQXqXkb", accessToken: cred.api_key_token, accessTokenSecret: cred.api_key_secret)
         
-//        if let searchTerm = aResource.queryTerm {
-            params[aResource.queryTerm] = searchQuery
-//        }
         
-//        if let key_name = aResource.api_key_name {
-//            if let key_def = aResource.api_key_def {
-                    params[aResource.api_key_name] = aResource.api_key_def
-//                }
-//        }
-        
-        Alamofire.request(.GET, aResource.url, parameters: params)
-            .responseJSON { (request, response, json, error) in
-//                println(response)
-                if let jsonToParse:AnyObject = json
-                {
-                    let jsonParsed = JSON(object:jsonToParse)
-                    println(jsonParsed)
-//                    jsonParsed[aResource.resultTerm].arrayObjects
-                    if let array = jsonParsed["response"][aResource.resultTerm].arrayObjects {
-                      completion(array)
+        client.get(resource.url, parameters: params, success: {(data: NSData, response: NSHTTPURLResponse) -> Void in
+                let json:JSON = JSON(data:data)
+                println("SEARCH!")
+                println(searchQuery)
+                let maybe:[String : AnyObject]? = json.dictionaryObject
+                if let actual = maybe {
+                    let artistResults:[ArtistResult]? = parseJSON(actual)
+                    if let actual = artistResults {
+                        completion(actual)
                     }
-                }
+                }            
+            }, failure: {(error:NSError!) -> Void in
+                println(error.localizedDescription)
+        })
+        
+//        Alamofire.request(.GET, resource.url, parameters: params)
+//            .responseJSON { (request, response, json, error) in
+//                println(request)
+//                println(response)
+//                if let jsonToParse:AnyObject = json {
+//                    let jsonParsed = JSON(object:jsonToParse)
+////                    println(jsonParsed)
+////                    jsonParsed[aResource.resultTerm].arrayObjects
+//                    if let array = jsonParsed[resource.resultTerm].arrayObjects {
+//                        println(array)
+//                      completion(array)
+//                    }
+//                }
+//            }
         }
+    
+//    func getJson(json:JSON, term:String) -> JSON {
+//        
+//    }
+    
+    func releases(resource:Resource, artistId:String, completion:(Array<AnyObject>) -> Void) {
     }
 }
+

@@ -1,3 +1,0 @@
-framework module swiftz {
-    header "swiftz-Swift.h"
-}
