@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 //import Alamofire
 import Realm
 //import swiftz
@@ -31,6 +32,9 @@ import Realm
 // Echo nest BD2FKJK9U8FCMFFT3
 // ["api_key_name":"key", "api_key":""]
 
+typealias ApiResponse = (data: NSData, response: NSHTTPURLResponse) -> Void
+typealias FailureResponse = (error:NSError!) -> Void
+
 class Api {
     func search(resources:RLMResults, searchQuery:String, completion:([ArtistResult]) -> Void) {
         var params = Dictionary<String, String>()
@@ -38,17 +42,11 @@ class Api {
         let searchTerm = resource.queryTerm
         params[searchTerm] = searchQuery
         params["type"] = "artist"
-        let creds:RLMResults = OAuthCredentials().all
-        let cred:OAuthCredential = creds[0] as OAuthCredential
         
-        let client:OAuthSwiftClient = OAuthSwiftClient(consumerKey:"oTwRJVjNCsbRoQyFGsDS",
-            consumerSecret: "hPJQPoeoQqmyVYMRwGAYvsnyHMQXqXkb", accessToken: cred.api_key_token, accessTokenSecret: cred.api_key_secret)
-        
-        
-        client.get(resource.url, parameters: params, success: {(data: NSData, response: NSHTTPURLResponse) -> Void in
-                let json:JSON = JSON(data:data)
-                println("SEARCH!")
-                println(searchQuery)
+        get(resource.url, parameters: params, success: { ApiResponse in
+                let json:JSON = JSON(data:ApiResponse.data)
+//                println("SEARCH!")
+//                println(searchQuery)
                 let maybe:[String : AnyObject]? = json.dictionaryObject
                 if let actual = maybe {
                     let artistResults:[ArtistResult]? = parseJSON(actual)
@@ -56,10 +54,36 @@ class Api {
                         completion(actual)
                     }
                 }            
-            }, failure: {(error:NSError!) -> Void in
-                println(error.localizedDescription)
+            }, failure: { FailureResponse in
+                println(FailureResponse.localizedDescription)
         })
+    }
+
+    func image(url:String, imageView:UIImageView) {
+        get(url, parameters: Dictionary<String, String>(), success:{ ApiResponse in
+            let d = ApiResponse.data
+            }, failure:{ FailureResponse in
+                println(FailureResponse.localizedDescription)
+        })
+    }
+    
+    func get(url:String, parameters:Dictionary<String, String>, success:ApiResponse, failure:FailureResponse) -> Void {
+        let client = getClient()
+        client.get(url, parameters: parameters, success, failure)
+    }
+    
+    
+    func getClient() -> OAuthSwiftClient {
+        let creds:RLMResults = OAuthCredentials().all
+        let cred:OAuthCredential = creds[0] as OAuthCredential
         
+        let client:OAuthSwiftClient = OAuthSwiftClient(consumerKey:"oTwRJVjNCsbRoQyFGsDS",
+            consumerSecret: "hPJQPoeoQqmyVYMRwGAYvsnyHMQXqXkb", accessToken: cred.api_key_token, accessTokenSecret: cred.api_key_secret)
+        return client
+    }
+}
+
+
 //        Alamofire.request(.GET, resource.url, parameters: params)
 //            .responseJSON { (request, response, json, error) in
 //                println(request)
@@ -74,13 +98,3 @@ class Api {
 //                    }
 //                }
 //            }
-        }
-    
-//    func getJson(json:JSON, term:String) -> JSON {
-//        
-//    }
-    
-    func releases(resource:Resource, artistId:String, completion:(Array<AnyObject>) -> Void) {
-    }
-}
-

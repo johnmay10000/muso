@@ -8,6 +8,7 @@
 
 import UIKit
 import Realm
+import Haneke
 
 class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
@@ -51,7 +52,7 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
     }
 
     func insertNewObject(sender: AnyObject) {
-        objects.insert(ArtistResult(id: 0,title: "",thumb: "",resource_url: "",type: "",uri: ""), atIndex: 0)
+        objects.insert(ArtistResult(id: 0,title: "",thumb: NSURL(),resource_url: NSURL(),type: "",uri: ""), atIndex: 0)
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
@@ -84,10 +85,17 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-//        println(objects[indexPath.row])
-//        let object = objects[indexPath.row]["title"] as String
-        let object = objects[indexPath.row].title as String
-        cell.textLabel.text = object
+
+        let object = objects[indexPath.row] as ArtistResult
+
+        if let (textLabel, imageView) = unwrap(cell.textLabel, cell.imageView) {
+            textLabel.text = object.title
+            imageView.frame = CGRectMake(0, 0, 40, 40)
+            if let maybeThumb = object.thumb {
+                println(maybeThumb)
+                imageView.hnk_setImageFromURL(maybeThumb)
+            }
+        }
         return cell
     }
 
@@ -118,6 +126,5 @@ class MasterViewController: UITableViewController, UISearchResultsUpdating {
             })
         }
     }
-
 }
 

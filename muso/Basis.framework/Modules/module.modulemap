@@ -1,0 +1,10 @@
+framework module Basis {
+  umbrella header "Basis.h"
+
+  export *
+  module * { export * }
+}
+
+module Basis.Swift {
+    header "Basis-Swift.h"
+}

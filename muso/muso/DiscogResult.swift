@@ -15,8 +15,8 @@ import Foundation
 struct ArtistResult {
     let id: Int
     let title: String
-    let thumb: String
-    let resource_url: String
+    let thumb: NSURL?
+    let resource_url: NSURL?
     let type: String
     let uri: String
 }
@@ -27,8 +27,8 @@ func parseArtistResult(result: AnyObject) -> ArtistResult? {
     return asDict(result) >>>= {
         mkArtistResult <*> int($0,"id")
             <*> string($0,"title")
-            <*> string($0,"thumb")
-            <*> string($0,"resource_url")
+            <*> (string($0,"thumb") >>>= toURL)
+            <*> (string($0,"resource_url") >>>= toURL)
             <*> string($0,"type")
             <*> string($0,"uri")
     }
@@ -49,8 +49,8 @@ extension ArtistResult : Printable {
     }
 }
 
-func toURL(urlString: String) -> NSURL {
-    return NSURL(string: urlString)!
+func toURL(urlString: String) -> NSURL? {
+    return NSURL(string: urlString)
 }
 
 
