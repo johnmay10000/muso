@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 //import Alamofire
 import Realm
-//import swiftz
+//import Basis
 //import swiftz_core
 
 // Required
@@ -42,6 +42,12 @@ class Api {
         let searchTerm = resource.queryTerm
         params[searchTerm] = searchQuery
         params["type"] = "artist"
+        
+        let xs: [Int8] = [1, 2, 0, 3, 4]
+        
+        sconcat(Min(), 2, xs)
+        
+        mconcat(Sum<Int8, NInt8>(i: { return nint8 }), xs)
         
         get(resource.url, parameters: params, success: { ApiResponse in
                 let json:JSON = JSON(data:ApiResponse.data)

@@ -24,12 +24,6 @@
 		946D794019F79F7700122FFF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946D793F19F79F7700122FFF /* Realm.framework */; };
 		946D794119F79F9400122FFF /* Realm.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 946D793F19F79F7700122FFF /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		946D795319F7B52800122FFF /* BC3.png in Resources */ = {isa = PBXBuildFile; fileRef = 946D795219F7B52800122FFF /* BC3.png */; };
-		947B33971A4F8E0C00ABA344 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947B33961A4F8E0C00ABA344 /* swiftz.framework */; };
-		947B33981A4F8E0C00ABA344 /* swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947B33961A4F8E0C00ABA344 /* swiftz.framework */; };
-		947B339A1A4F8E2A00ABA344 /* Basis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947B33991A4F8E2A00ABA344 /* Basis.framework */; };
-		947B339B1A4F8E2A00ABA344 /* Basis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 947B33991A4F8E2A00ABA344 /* Basis.framework */; };
-		947B339C1A4F8E4200ABA344 /* Basis.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 947B33991A4F8E2A00ABA344 /* Basis.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		947B339D1A4F8E4200ABA344 /* swiftz.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 947B33961A4F8E0C00ABA344 /* swiftz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		94D5159819F36A4A009446D8 /* StartUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D5159719F36A4A009446D8 /* StartUp.swift */; };
 		94D515BD19F3814A009446D8 /* HMACSHA1Signature.m in Sources */ = {isa = PBXBuildFile; fileRef = 94D515B519F3814A009446D8 /* HMACSHA1Signature.m */; };
 		94D515BE19F3814A009446D8 /* OAuth1Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D515B619F3814A009446D8 /* OAuth1Swift.swift */; };
@@ -62,8 +56,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				947B339C1A4F8E4200ABA344 /* Basis.framework in Copy Frameworks */,
-				947B339D1A4F8E4200ABA344 /* swiftz.framework in Copy Frameworks */,
 				946D794119F79F9400122FFF /* Realm.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -88,12 +80,11 @@
 		9434E51919DE81DA004D4EAA /* musoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musoTests.swift; sourceTree = "<group>"; };
 		944076661A3F0FB90042D841 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Unwrap.swift"; sourceTree = "<group>"; };
 		944BBF3319E6AC5500FF566C /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		944D2F891A4F95DB007EFABF /* muso.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = muso.playground; sourceTree = "<group>"; };
 		946D793A19F60D3700122FFF /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		946D793D19F79F6900122FFF /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		946D793F19F79F7700122FFF /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		946D795219F7B52800122FFF /* BC3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BC3.png; sourceTree = "<group>"; };
-		947B33961A4F8E0C00ABA344 /* swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = swiftz.framework; sourceTree = "<group>"; };
-		947B33991A4F8E2A00ABA344 /* Basis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Basis.framework; sourceTree = "<group>"; };
 		94D5159719F36A4A009446D8 /* StartUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartUp.swift; sourceTree = "<group>"; };
 		94D515B419F3814A009446D8 /* HMACSHA1Signature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMACSHA1Signature.h; sourceTree = "<group>"; };
 		94D515B519F3814A009446D8 /* HMACSHA1Signature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMACSHA1Signature.m; sourceTree = "<group>"; };
@@ -116,8 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				947B33971A4F8E0C00ABA344 /* swiftz.framework in Frameworks */,
-				947B339A1A4F8E2A00ABA344 /* Basis.framework in Frameworks */,
 				946D794019F79F7700122FFF /* Realm.framework in Frameworks */,
 				940D062119E2700000F8CD0F /* libc++.dylib in Frameworks */,
 			);
@@ -127,8 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				947B33981A4F8E0C00ABA344 /* swiftz.framework in Frameworks */,
-				947B339B1A4F8E2A00ABA344 /* Basis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,8 +143,7 @@
 		9434E4F319DE81DA004D4EAA = {
 			isa = PBXGroup;
 			children = (
-				947B33991A4F8E2A00ABA344 /* Basis.framework */,
-				947B33961A4F8E0C00ABA344 /* swiftz.framework */,
+				944D2F891A4F95DB007EFABF /* muso.playground */,
 				94D515B219F38129009446D8 /* OAuthSwift */,
 				940D062019E2700000F8CD0F /* libc++.dylib */,
 				940D061F19E26FCE00F8CD0F /* Realm */,
@@ -499,6 +485,7 @@
 				);
 				INFOPLIST_FILE = muso/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "OAuthSwift-Bridging-Header.h";
 			};
